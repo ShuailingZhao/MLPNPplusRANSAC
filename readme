@@ -1,0 +1,10 @@
+MLPNP算法及置信度边界输出第二版(+RANSAC)
+接口：
+bool pnpOK = getDxDyDzWithPnP(rtk3dPoints, backImagePoints, cameraPosGauss, colPoints, imgPoints, confFile, covarmatrix, ind, dx);
+说明：其余都不变，dx为会长算法中所选取的原点到自车位置x,y,z三个方向的不确定度。Mat(3, 1)类型(z方向为车到作为世界坐标系原点的点的深度的不确定度（置信度输出）)。
+      covarmatrix为每个点图像像素坐标的协方差。vector<Mat>类型,3*3矩阵。
+      covarmatrix中的Mat=[sigmax^2, sigmaxy, 0;
+                          sigmaxy, sigmay^2, 0;
+                             0,        0,    0]
+相比于第一版，增加了RANSAC算法。
+注：test.cpp为测试主函数，不是main.cpp(该函数为MLPNP的主程序)
